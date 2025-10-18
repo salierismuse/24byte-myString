@@ -147,13 +147,14 @@ myString& myString::operator+=(const myString& str) {
     }
     else {
         if (length() + str.length() > 22) {
-            char temp[length()];
+            char *temp = new char[length()+1];
             strcpy(temp, c_str());
             set_flag_and_size(true, length()+str.length());
             u.large_str.capacity = u.large_str.len*2;
             u.large_str.longStr = new char[u.large_str.capacity+1];
             strcpy(u.large_str.longStr, temp);
             strcat(u.large_str.longStr, str.c_str());
+            delete[] temp;
             return * this;
         }
         else {
@@ -182,4 +183,14 @@ void myString::clear() noexcept {
         u.small_str.flag_and_small_size = 0;
         u.small_str.str[0] = '\0';
     }
+}
+
+bool myString::operator==(const myString& s2) {
+    if (length() != s2.length()) {
+        return false;
+    }
+    if (strcmp(c_str(), s2.c_str())== 0){
+        return true;
+    }
+    return false;
 }

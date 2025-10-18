@@ -40,6 +40,7 @@ class myString {
 
     //overloads
     friend std::ostream& operator<<(std::ostream& os, const myString& str);
+    bool operator==(const myString&);
     myString& operator+= (const myString& str);
 
 
