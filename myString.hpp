@@ -1,12 +1,15 @@
 #ifndef MYSTRING_H_
 #define MYSTRING_H_
-#include <stdint.h> 
+#include <stdint.h>
 #include <stdio.h>
 #include <utility>
+#include <cstring>
+#include <iostream>
 
 class myString {
     public:
 
+    myString();
     // helper
     void swap(myString& s2) noexcept;
 
@@ -22,12 +25,23 @@ class myString {
     myString& operator=(myString);
 
     //move
-    myString(myString&&);
+    myString(myString&&) noexcept;
 
-
-    // getter
 
     void getBuffer();
+
+
+    const char* c_str() const;
+    size_t length() const noexcept;
+    char& operator[] (size_t pos);
+    const char& operator[] (size_t pos) const;
+    bool empty() const noexcept;
+    void clear() noexcept;
+
+    //overloads
+    friend std::ostream& operator<<(std::ostream& os, const myString& str);
+    myString& operator+= (const myString& str);
+
 
     private:
 
@@ -58,4 +72,3 @@ class myString {
 };
 
 #endif
-
